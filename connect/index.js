@@ -19,7 +19,6 @@ const secret = "234tyuklkjgfdsazx";
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
-// app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const upload = multer({ dest: "uploads/" });
@@ -194,8 +193,12 @@ app.put("/post/:id", upload.single("file"), async (req, res) => {
   }
 });
 
-const PORT = 4000;
+// Catch-all for 404 errors
+app.use((req, res, next) => {
+  res.status(404).json({ message: "Resource not found" });
+});
 
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
