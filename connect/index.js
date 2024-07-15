@@ -195,8 +195,8 @@ app.put("/post/:id", upload.single("file"), async (req, res) => {
 
 // Catch-all for 404 errors
 app.use((req, res, next) => {
-  // res.status(404).json({ message: "Resource not found" });
-  res({ "Resource found" });
+  console.log("Resource not found");
+  res.status(404).json({ message: "Resource not found" });
 });
 
 const PORT = process.env.PORT || 4000;
