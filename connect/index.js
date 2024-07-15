@@ -193,8 +193,10 @@ app.put("/post/:id", upload.single("file"), async (req, res) => {
   }
 });
 
-if (process.env.API_PORT) {
-  app.listen(process.env.API_PORT);
-}
+const PORT = 4000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports = app;
